@@ -42,7 +42,7 @@ userInputService.InputEnded:Connect(function(key)
     end
 end)
 
-menu.outline.outline.main.text.Text = "movement.cc"
+menu.outline.outline.main.text.Text = "movement.cc | credits : sjors and enklare"
 
 function library:notify(text)
     if playing then return end
