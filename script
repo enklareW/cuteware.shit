@@ -12,8 +12,12 @@ end
 if not isfolder("movement.cc/"..tostring(game.GameId)) then
     makefolder("movement.cc/"..tostring(game.GameId))
 end
+
+if not isfolder("movement.cc/".."luas") then
+    makefolder("movement.cc/".."luas")
+end
 --vars
-local library,menu,tabholder = loadstring(game:HttpGet("https://raw.githubusercontent.com/sj0rs1/alora/main/library.lua"))()
+local library,menu,tabholder = loadstring(game:HttpGet("https://raw.githubusercontent.com/enklareW/movement.cc/main/library"))()
 local userInputService = game:GetService("UserInputService")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local runService = game:GetService("RunService")
@@ -558,7 +562,12 @@ end)
 local aimbotTab = library:addTab("Aimbot")
 local visualsTab = library:addTab("Visuals")
 local miscTab = library:addTab("Misc")
+local luaTab = library:addTab("Luas")
 local configTab = library:addTab("Settings")
+
+
+
+
 
 local configGroup = configTab:createGroup(0)
 configGroup:addColorpicker({text = "Menu Accent",flag = "menu_accent",ontop = true,color = Color3.fromRGB(100,60,80),callback = function(val)
@@ -752,15 +761,6 @@ drawingGroup:addToggle({text = "Drawing Enabled",flag = "drawing_enabled",callba
             line.To = Vector2.new(camera.ViewportSize.X/2 + 60*width,normalY - value/4)
             line.Thickness = 1
             line.Transparency = 1
-            if library.flags["velocity_color"].Value == "Library Colors" then
-                line.Color = library.libColor
-            elseif library.flags["velocity_color"].Value == "Straight" then
-                local Colors = Color3.fromRGB(0,0,0)
-                local white = Color3.fromRGB(255,255,255)
-
-                local Colored = ColorSequence.new(Colors)
-        line.Color = Colored
-            end
             line.Color = Color3.new(1,1,1)
             line.Visible = true
             if #lines > 1 then
@@ -809,7 +809,6 @@ drawingGroup:addToggle({text = "Velocity Graph",flag = "velo_graph"})
 drawingGroup:addToggle({text = "Velocity Indicator",flag = "velo_indicator"})
 drawingGroup:addToggle({text = "WASD Indicator",flag = "wasd_indicator"})
 drawingGroup:addSlider({text = "Graph Width",flag = "graph_width",min = 1,max = 5,value = 1})
-drawingGroup:addList({text = "Velocity Color",flag = "velocity_color",multiselect = false,values = {"Library Colors","Straight","Pink"}})
 
 local movementGroup = miscTab:createGroup(0)
 local otherGroup = miscTab:createGroup(0)
@@ -1000,6 +999,36 @@ end})
 otherGroup2:addSlider({text = "Backtrack Time",flag = "backtrack_time",value = 500,min = 1,max = 2000})
 otherGroup2:addSlider({text = "Backtrack Transparency",flag = "backtrack_transparency",value = 75,min = 0,max = 100})
 otherGroup2:addSlider({text = "Hitsound Volume",flag = "hitsound_volume",value = 2,min = 1,max = 10})
+
+
+local luaGroup = luaTab:createGroup(0)
+
+
+
+local allluas = {}
+
+for _,lua in pairs(listfiles("movement.cc/luas")) do
+	local luaname = string.gsub(lua, "movement.cc/luas\\", "")
+	table.insert(allluas, luaname)
+end
+
+local lualist = luaGroup:addList({text = "Luas",flag = "selectedlua",multiselect = false,values = allluas})
+
+
+luaGroup:addButton({text = "Load",callback = function()
+    local name = library.flags["selectedlua"]
+    loadstring(readfile("movement.cc/luas/"..name))()
+end})
+
+luaGroup:addButton({text = "Refresh",callback = function()
+    local tbl = {}
+    for _,lua in pairs(listfiles("movement.cc/luas")) do
+        local luaname = string.gsub(lua, "movement.cc/luas\\", "")
+        table.insert(tbl, luaname)
+    end
+    library.options["selectedlua"].refresh(tbl)
+end})
+
 
 local btFolder = Instance.new("Folder",workspace)
 players.PlayerAdded:Connect(function(plr)
@@ -1281,7 +1310,7 @@ ebsfx.SoundId = 'rbxassetid://7921976380'
         local seconds = string.len(sec) == 2 and sec or "0"..sec
         local minutes = string.len(min) == 2 and min or "0"..min
         local hours = string.len(hrs) == 2 and hrs or "0"..hrs
-        aloraWatermark.Text = "alora | "..ver.." | "..hours..":"..minutes..":"..seconds
+        aloraWatermark.Text = "movement.cc | "..ver.." | "..hours..":"..minutes..":"..seconds
     end
 end
 runService.RenderStepped:Connect(onStep)
