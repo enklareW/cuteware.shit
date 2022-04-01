@@ -996,6 +996,20 @@ otherGroup2:addButton({text = "Unlock All Skins",callback = function()
         TClone.Parent = localPlayer.SkinFolder;CTClone.Parent = localPlayer.SkinFolder
     end
 end})
+otherGroup2:addButton({text = "Save Skins",callback = function() 
+local skinstable = {}
+
+for i,skins in pairs(localPlayer.SkinFolder.TFolder) do
+table.insert(skinstable, skins)
+end
+
+
+writefile("Yeet.cfg",skinstable)
+ 
+end})
+otherGroup2:addButton({text = "Load Saved Skins",callback = function() 
+    readfile("Yeet.cfg",game.Players.LocalPlayer.SkinFolder.TFolder.AK47.Value)
+end})
 otherGroup2:addSlider({text = "Backtrack Time",flag = "backtrack_time",value = 500,min = 1,max = 2000})
 otherGroup2:addSlider({text = "Backtrack Transparency",flag = "backtrack_transparency",value = 75,min = 0,max = 100})
 otherGroup2:addSlider({text = "Hitsound Volume",flag = "hitsound_volume",value = 2,min = 1,max = 10})
