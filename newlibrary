@@ -76,7 +76,6 @@ function library:set_draggable(gui)
 end
 
 function library.new(library_title, cfg_location)
-   
     local menu = {}
     menu.values = {}
     menu.on_load_cfg = library.signal.new("on_load_cfg")
@@ -196,7 +195,7 @@ function library.new(library_title, cfg_location)
 
     library:set_draggable(ImageLabel)
 
-  local Title = library:create("TextLabel", {
+    local Title = library:create("TextLabel", {
         Name = "Title",
         AnchorPoint = Vector2.new(0.5, 0),
         BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -325,7 +324,7 @@ function library.new(library_title, cfg_location)
         function tab.new_section(section_name)
             local section = {}
 
-            num_sections = num_sections + 1
+            num_sections += 1
 
             menu.values[tab.tab_num][section_name] = {}
 
@@ -2044,7 +2043,4 @@ function library.new(library_title, cfg_location)
 
     return menu
 end
-
-
-local gui = library:new("idiot") 
-local legit = gui:section("legit")
+return library
