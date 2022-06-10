@@ -75,14 +75,11 @@ function library:set_draggable(gui)
     end)
 end
 
-function library.new(library_title, cfg_location)
+function library.new(library_title)
     local menu = {}
     menu.values = {}
     menu.on_load_cfg = library.signal.new("on_load_cfg")
 
-    if not isfolder(cfg_location) then
-        makefolder(cfg_location)
-    end
     
     function menu.copy(original)
         local copy = {}
