@@ -87,9 +87,7 @@ function library:addTab(name)
         end
     end)
 
-    for i,v in next, library.tabbuttons do
-        v.Size = UDim2.new(1/#library.tabbuttons,0,1,0)
-    end
+   
 
     local tab = {}
     local groupCount = 0
