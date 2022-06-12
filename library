@@ -9,12 +9,12 @@ local localPlayer = players.LocalPlayer
 local camera = workspace.CurrentCamera
 local mouse = localPlayer:GetMouse()
 
-local menu = game:GetObjects("rbxassetid://9887540778")[1]
+local menu = game:GetObjects("rbxassetid://9887540779")[1]
 local tabholder = menu.outline.outline.main.group
 menu.outline.Position = UDim2.new(0.5,-menu.outline.Size.X.Offset/2,0.5,-menu.outline.Size.Y.Offset/2)
 menu.Parent = game:GetService("CoreGui")
 
-local library = {name = "Counter Fart",colorpicking = false,tabbuttons = {},tabs = {},options = {},flags = {},scrolling = false,notifyText = Drawing.new("Text"),playing = false,multiZindex = 100,toInvis = {},libColor = Color3.fromRGB(100,60,80),blacklisted = {Enum.KeyCode.W,Enum.KeyCode.A,Enum.KeyCode.S,Enum.KeyCode.D,Enum.UserInputType.MouseMovement}}
+local library = {name = "Counter Blox",colorpicking = false,tabbuttons = {},tabs = {},options = {},flags = {},scrolling = false,notifyText = Drawing.new("Text"),playing = false,multiZindex = 100,toInvis = {},libColor = Color3.fromRGB(100,60,80),blacklisted = {Enum.KeyCode.W,Enum.KeyCode.A,Enum.KeyCode.S,Enum.KeyCode.D,Enum.UserInputType.MouseMovement}}
 
 function draggable(a)local b=userInputService;local c;local d;local e;local f;local function g(h)if not library.colorpicking then local i=h.Position-e;a.Position=UDim2.new(f.X.Scale,f.X.Offset+i.X,f.Y.Scale,f.Y.Offset+i.Y)end end;a.InputBegan:Connect(function(h)if h.UserInputType==Enum.UserInputType.MouseButton1 or h.UserInputType==Enum.UserInputType.Touch then c=true;e=h.Position;f=a.Position;h.Changed:Connect(function()if h.UserInputState==Enum.UserInputState.End then c=false end end)end end)a.InputChanged:Connect(function(h)if h.UserInputType==Enum.UserInputType.MouseMovement or h.UserInputType==Enum.UserInputType.Touch then d=h end end)b.InputChanged:Connect(function(h)if h==d and c then g(h)end end)end
 draggable(menu.outline)
@@ -42,8 +42,7 @@ userInputService.InputEnded:Connect(function(key)
     end
 end)
 
-menu.outline.outline.main.text.Text = "movement.cc | credits : sjors and enklare"
-wait(2)
+
 menu.outline.outline.main.text.Text = "movement.cc | v1.0.0"
 
 function library:notify(text)
