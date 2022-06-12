@@ -731,7 +731,7 @@ end
 
 function library:loadConfig()
     local name = library.flags["selected_config"]
-    if not isfile("cuteware.shit/..name..".cfg") then
+    if not isfile("cuteware.shit/"..name..".cfg") then
         library:notify("Config file not found!")
         return
     end
