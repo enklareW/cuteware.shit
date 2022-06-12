@@ -9,7 +9,7 @@ local localPlayer = players.LocalPlayer
 local camera = workspace.CurrentCamera
 local mouse = localPlayer:GetMouse()
 
-local menu = game:GetObjects("rbxassetid://9887540779")[1]
+local menu = game:GetObjects("rbxassetid://9887567173")[1]
 local tabholder = menu.outline.outline.main.group
 menu.outline.Position = UDim2.new(0.5,-menu.outline.Size.X.Offset/2,0.5,-menu.outline.Size.Y.Offset/2)
 menu.Parent = game:GetService("CoreGui")
