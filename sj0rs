@@ -722,14 +722,29 @@ function library:saveConfig()
         end
     end
     writefile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg",game:GetService("HttpService"):JSONEncode(jig))
-    library:notify("Succesfully saved config "..name..".cfg!")
+     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+        "cuteware.shit",
+        "succesfully saved config "..name..".cfg!",
+        library.libColor, 
+        Color3.new(1,1,1),
+        .01
+    )
+    
     library:refreshConfigs()
 end
 
 function library:loadConfig()
     local name = library.flags["selected_config"]
     if not isfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg") then
-        library:notify("Config file not found!")
+         getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+        "cuteware.shit",
+        "config not found.",
+        library.libColor, 
+        Color3.new(1,1,1),
+        .01
+    )
         return
     end
     local config = game:GetService("HttpService"):JSONDecode(readfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg"))
@@ -762,7 +777,15 @@ function library:loadConfig()
             end
         end)end)
     end
-    library:notify("Succesfully loaded config "..name..".cfg!")
+         getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+        "cuteware.shit",
+        "succesfully loaded config "..name..".cfg!",
+        library.libColor, 
+        Color3.new(1,1,1),
+        .01
+    )
+   
 end
 
 function library:refreshConfigs()
