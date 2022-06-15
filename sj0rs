@@ -721,11 +721,11 @@ function library:saveConfig()
             jig[i] = v
         end
     end
-    writefile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg",game:GetService("HttpService"):JSONEncode(jig))
+    writefile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cws",game:GetService("HttpService"):JSONEncode(jig))
      getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
         "cuteware.shit",
-        "succesfully saved config "..name..".cfg!",
+        "succesfully saved config "..name..".cws!",
         library.libColor, 
         Color3.new(1,1,1),
         .01
@@ -736,7 +736,7 @@ end
 
 function library:loadConfig()
     local name = library.flags["selected_config"]
-    if not isfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg") then
+    if not isfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cws") then
          getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
         "cuteware.shit",
@@ -747,7 +747,7 @@ function library:loadConfig()
     )
         return
     end
-    local config = game:GetService("HttpService"):JSONDecode(readfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg"))
+    local config = game:GetService("HttpService"):JSONDecode(readfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cws"))
     for i,v in next, library.options do
         spawn(function()pcall(function()
             if config[i] then
@@ -780,7 +780,7 @@ function library:loadConfig()
          getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
         "cuteware.shit",
-        "succesfully loaded config "..name..".cfg!",
+        "succesfully loaded config "..name..".cws!",
         library.libColor, 
         Color3.new(1,1,1),
         .01
@@ -797,8 +797,8 @@ function library:refreshConfigs()
 end
 
 function library:deleteConfig()
-    if isfile("cuteware.shit/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cfg") then
-        delfile("cuteware.shit/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cfg")
+    if isfile("cuteware.shit/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cws") then
+        delfile("cuteware.shit/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cws")
         library:refreshConfigs()
     end
 end
