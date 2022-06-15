@@ -721,18 +721,18 @@ function library:saveConfig()
             jig[i] = v
         end
     end
-    writefile("alora/"..tostring(game.GameId).."/"..name..".cfg",game:GetService("HttpService"):JSONEncode(jig))
+    writefile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg",game:GetService("HttpService"):JSONEncode(jig))
     library:notify("Succesfully saved config "..name..".cfg!")
     library:refreshConfigs()
 end
 
 function library:loadConfig()
     local name = library.flags["selected_config"]
-    if not isfile("alora/"..tostring(game.GameId).."/"..name..".cfg") then
+    if not isfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg") then
         library:notify("Config file not found!")
         return
     end
-    local config = game:GetService("HttpService"):JSONDecode(readfile("alora/"..tostring(game.GameId).."/"..name..".cfg"))
+    local config = game:GetService("HttpService"):JSONDecode(readfile("cuteware.shit/"..tostring(game.GameId).."/"..name..".cfg"))
     for i,v in next, library.options do
         spawn(function()pcall(function()
             if config[i] then
@@ -767,15 +767,15 @@ end
 
 function library:refreshConfigs()
     local tbl = {}
-    for i,v in next, listfiles("alora/"..tostring(game.GameId)) do
+    for i,v in next, listfiles("cuteware.shit/"..tostring(game.GameId)) do
         table.insert(tbl,v:split("\\")[2]:split(".")[1])
     end
     library.options["selected_config"].refresh(tbl)
 end
 
 function library:deleteConfig()
-    if isfile("alora/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cfg") then
-        delfile("alora/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cfg")
+    if isfile("cuteware.shit/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cfg") then
+        delfile("cuteware.shit/"..tostring(game.GameId).."/"..library.flags["selected_config"]..".cfg")
         library:refreshConfigs()
     end
 end
