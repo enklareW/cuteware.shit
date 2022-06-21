@@ -1705,11 +1705,12 @@ inputService.InputBegan:connect(function(input)
 if input.KeyCode == Enum.KeyCode.F3 then
     if opened == false then
         opened = true
-        self.base.Enabled = true
-        self.cursor.Visible = true
+        game.CoreGui.ScreenGui.Enabled = true
+        
     else
-        self.base.Enabled = false
-        self.cursor.Visible = false
+    opened = false
+        game.CoreGui.ScreenGui.Enabled = false
+        
     end
 	
 end
