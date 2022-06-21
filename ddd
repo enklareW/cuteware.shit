@@ -1701,7 +1701,7 @@ inputService.InputBegan:connect(function(input)
 end)
 
 inputService.InputChanged:connect(function(input)
-if input.UserInputService == Enum.KeyCode.Insert then
+if input.KeyCode == Enum.KeyCode.Insert then
    library.Close()
 end
 
