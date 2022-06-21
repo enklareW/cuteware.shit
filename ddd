@@ -1700,9 +1700,17 @@ inputService.InputBegan:connect(function(input)
 	end
 end)
 
+local opened = false
 inputService.InputChanged:connect(function(input)
 if input.KeyCode == Enum.KeyCode.F3 then
-    self.open = not self.open
+    if opened == false then
+        opened = true
+        self.base.Enabled = true
+        self.cursor.Visible = true
+    else
+        self.base.Enabled = false
+        self.cursor.Visible = false
+    end
 	self.cursor.Visible = self.open
 end
 
