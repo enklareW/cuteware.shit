@@ -1701,7 +1701,7 @@ inputService.InputBegan:connect(function(input)
 end)
 
 local opened = false
-inputService.InputChanged:connect(function(input)
+inputService.InputBegan:connect(function(input)
 if input.KeyCode == Enum.KeyCode.F3 then
     if opened == false then
         opened = true
@@ -1711,6 +1711,7 @@ if input.KeyCode == Enum.KeyCode.F3 then
         self.base.Enabled = false
         self.cursor.Visible = false
     end
+	
 end
 
 end)
