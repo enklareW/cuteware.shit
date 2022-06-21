@@ -2,22 +2,21 @@
 
 
 repeat wait() until game:IsLoaded()
-if game:GetService("CoreGui"):FindFirstChild("sjorlib") then return end
 getgenv().error = function() end
 local ver = "1.0.0"
 --files
-if not isfolder("movement.cc") then
-    makefolder("movement.cc")
+if not isfolder("cuteware.shit") then
+    makefolder("cuteware.shit")
 end
-if not isfolder("movement.cc/"..tostring(game.GameId)) then
-    makefolder("movement.cc/"..tostring(game.GameId))
+if not isfolder("cuteware.shit/"..tostring(game.GameId)) then
+    makefolder("cuteware.shit/"..tostring(game.GameId))
 end
 
-if not isfolder("movement.cc/".."luas") then
-    makefolder("movement.cc/".."luas")
+if not isfolder("cuteware.shit/".."luas") then
+    makefolder("cuteware.shit/".."luas")
 end
 --vars
-local library,menu,tabholder = loadstring(game:HttpGet("https://raw.githubusercontent.com/enklareW/movement.cc/main/library"))()
+local library,menu,tabholder = loadstring(game:HttpGet("https://raw.githubusercontent.com/enklareW/cuteware.shit/main/sj0rs"))()
 local userInputService = game:GetService("UserInputService")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local runService = game:GetService("RunService")
@@ -30,6 +29,7 @@ local debris = game:GetService("Debris")
 local client = getsenv(localPlayer.PlayerGui.Client)
 
 local aloraWatermark = Drawing.new("Text");aloraWatermark.Font = 2;aloraWatermark.Position = Vector2.new(50,24);aloraWatermark.Visible = false;aloraWatermark.Size = 13;aloraWatermark.Color = Color3.new(1,1,1);aloraWatermark.Outline = true
+
 
 local skyboxes = {
     ["Purple Nebula"] = {
@@ -420,6 +420,7 @@ end
 
 local unlockInventory,unlocked = false,false
 local skins = {{"TKnife_Stock"},{"CTKnife_Stock"},{"TGlove_Stock"},{"CTGlove_Stock"}}
+local enklareskins = {{"M4A4_King"},{"Butterfly Knife_Twitch"},{"DesertEagle_DropX"},{"Sickle_Stock"},{"AWP_Hika"},{"Sports Glove_CottonTail"}, {"AK47_Glo"},{"UMP_Molten"},{"Falchion Knife_Late Night"},{"Handwraps_Wetland"},{"USP_Yellowbelly"},{"Falchion Knife_Kimura"},{"Fingerless Glove_Kimura"},{"SG_DropX"},{"Scout_Xmas"},{"DesertEagle_Skin Committee"}}
 local btInfo = {parent = nil,folder = nil}
 local preventBt = false
 local silentPart = nil
@@ -434,6 +435,9 @@ local oldNewindex = meta.__newindex
 for i,v in pairs(localPlayer.PlayerGui.Client.Rarities:GetChildren()) do
     table.insert(skins,{v.Name})
 end
+
+
+
 
 meta.__newindex = newcclosure(function(self,idx,val)
     if idx == "JumpPower" and hookJp then
@@ -530,7 +534,7 @@ meta.__namecall = newcclosure(function(self,...)
             if #self.Name == 38 then
                 if not unlocked then
                     unlocked = true
-                    for i,v in next, skins do
+                    for i,v in next, enklareskins do
                         local doSkip
                         for _i,_v in next, args[1] do
                             if v[1] == _v[1] then
@@ -544,6 +548,27 @@ meta.__namecall = newcclosure(function(self,...)
                 end
                 return
             end
+
+
+            if unlockInventory then
+                if #self.Name == 38 then
+                    if not unlocked then
+                        unlocked = true
+                        for i,v in next, skins do
+                            local doSkip
+                            for _i,_v in next, args[1] do
+                                if v[1] == _v[1] then
+                                    doSkip = true
+                                end
+                            end
+                            if not doSkip then
+                                table.insert(args[1], v)
+                            end
+                        end
+                    end
+                    return
+                end
+            end   
             if self.Name == "DataEvent" and args[1][4] then
                 local currentSkin = string.split(args[1][4][1],"_")[2]
                 local name = args[1][3]
@@ -562,7 +587,6 @@ end)
 local aimbotTab = library:addTab("Aimbot")
 local visualsTab = library:addTab("Visuals")
 local miscTab = library:addTab("Misc")
-local luaTab = library:addTab("Luas")
 local configTab = library:addTab("Settings")
 
 
@@ -570,7 +594,7 @@ local configTab = library:addTab("Settings")
 
 
 local configGroup = configTab:createGroup(0)
-configGroup:addColorpicker({text = "Menu Accent",flag = "menu_accent",ontop = true,color = Color3.fromRGB(100,60,80),callback = function(val)
+configGroup:addColorpicker({text = "Menu Accent",flag = "menu_accent",ontop = true,color = Color3.fromRGB(247, 242, 180),callback = function(val)
     for i,v in next, tabholder:GetDescendants() do
         pcall(function()
             if v.Name ~= "dontchange" and v.BackgroundColor3 == library.libColor then
@@ -847,114 +871,198 @@ otherGroup:addToggle({text = "Infinite Cash",flag = "inf_cash",callback = functi
         localPlayer.Cash.Value = 1000
     end
 end})
-otherGroup:addToggle({text = "Spectator List",flag = "spec_list",callback = function(val)
+
+
+otherGroup2:addToggle({text = "Backtrack",flag = "backtrack_enabled"})
+otherGroup2:addToggle({text = "Hitsound",flag = "hitsound_enabled"})
+
+
+otherGroup2:addToggle({text = "Watermark",flag = "watermark_enabled",callback = function(K)
+
+    if K == true then
+        -- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local Watermark = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+
+--Properties:
+
+Watermark.Name = "Watermark"
+Watermark.Parent = game.CoreGui
+
+Frame.Parent = Watermark
+Frame.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+Frame.BorderColor3 = Color3.fromRGB(76, 33, 250)
+Frame.BorderSizePixel = 1
+Frame.Position = UDim2.new(0.800727308, 0, -0.0319018364, 49)
+Frame.Size = UDim2.new(0, 350, 0, 20)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderSizePixel = 0
+TextLabel.Size = UDim2.new(0, 304, 0, 20)
+TextLabel.Font = Enum.Font.Code
+TextLabel.Text = "cuteware.shit | time | name"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 14.000
+
+-- Scripts:
+
+local function VQQHPRG_fake_script() -- TextLabel.LocalScript 
+	local script = Instance.new('LocalScript', TextLabel)
+
+	
+	
+	while wait() do
+        Frame.BorderColor3 = library.libColor
+	local l = math.fmod(tick(),86400)
+	local h = math.floor(l/3600)
+	local m = math.floor(l/60-h*60)
+		local s = math.floor(math.fmod(l,60))
+		
+		if m <= 9 then
+			m = "0" ..m
+		end
+		if s <= 9 then
+			s = "0" ..s
+		end
+	
+		script.Parent.Text =  "cuteware.shit | " ..h.. ":" ..m.. ":" ..s.. " | ".. game.Players.LocalPlayer.Name
+		end
+end
+coroutine.wrap(VQQHPRG_fake_script)()
+
+
+        
+        local function QQXIOK_fake_script() -- ScreenLabel.LocalScript 
+            local script = Instance.new('LocalScript', Watermark)
+            
+            local gui = script.Parent
+            gui.Draggable = true
+            gui.Active = true
+        end
+        coroutine.wrap(QQXIOK_fake_script)()
+    elseif K == false then
+        game.CoreGui.Watermark:Destroy()
+    end
+end})
+
+otherGroup2:addToggle({text = "Spectator List",flag = "spec_list",callback = function(val)
     if val ==  true then
-    local SpectatorsList = Instance.new("ScreenGui")
-    local Spectators = Instance.new("Frame")
-    local Container = Instance.new("Frame")
-    local UIPadding = Instance.new("UIPadding")
-    local Text = Instance.new("TextLabel")
-    local Players = Instance.new("TextLabel")
-    local Background = Instance.new("Frame")
-    local UIGradient = Instance.new("UIGradient")
-    local Color = Instance.new("Frame")
-    local UIGradient_2 = Instance.new("UIGradient")
 
-    SpectatorsList.Parent = game.CoreGui
-    SpectatorsList.Name = "SpectatorsList"
-    SpectatorsList.Enabled = true
+        local SpectatorsList = Instance.new("ScreenGui")
+        local Spectators = Instance.new("Frame")
+        local Container = Instance.new("Frame")
+        local UIListLayout = Instance.new("UIListLayout")
+        local Players = Instance.new("TextLabel")
+        local Text = Instance.new("TextLabel")
+        
+        --Properties:
+        
+        SpectatorsList.Name = "SpectatorsList"
+        SpectatorsList.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        
+        Spectators.Name = "Spectators"
+        Spectators.Parent = SpectatorsList
+        Spectators.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+        Spectators.BorderColor3 = Color3.fromRGB(255, 23, 23)
+        Spectators.Position = UDim2.new(0.00618181657, 0, 0.402453989, 49)
+        Spectators.Size = UDim2.new(0, 203, 0, 20)
+        
+        Container.Name = "Container"
+        Container.Parent = Spectators
+        Container.BackgroundTransparency = 1.000
+        Container.BorderSizePixel = 0
+        Container.Position = UDim2.new(0, 0, 0, 21)
+        Container.Size = UDim2.new(1, 0, 0.339999974, 14)
+        Container.ZIndex = 3
+        
+        UIListLayout.Parent = Container
+        UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+        
+        Players.Name = "Players"
+        Players.Parent = Container
+        Players.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+        Players.BorderSizePixel = 0
+        Players.Position = UDim2.new(0, 0, 1.9194442, 0)
+        Players.Size = UDim2.new(1, 0, 1.01111042, 0)
+        Players.ZIndex = 4
+        Players.Font = Enum.Font.Code
+        Players.Text = "loading..."
+        Players.TextColor3 = Color3.fromRGB(65025, 65025, 65025)
+        Players.TextSize = 14.000
+        Players.TextStrokeTransparency = 0.000
+        
+        Text.Name = "Text"
+        Text.Parent = Spectators
+        Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Text.BackgroundTransparency = 1.000
+        Text.BorderSizePixel = 0
+        Text.Size = UDim2.new(1, 0, 1.04999995, 0)
+        Text.ZIndex = 4
+        Text.Font = Enum.Font.Code
+        Text.Text = "Spectators"
+        Text.TextColor3 = Color3.fromRGB(65025, 65025, 65025)
+        Text.TextSize = 14.000
+        Text.TextStrokeTransparency = 0.000
 
-    Spectators.Name = "Spectators"
-    Spectators.Parent = SpectatorsList
-    Spectators.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
-    Spectators.BackgroundTransparency = 1.000
-    Spectators.BorderColor3 = Color3.fromRGB(20, 20, 20)
-    Spectators.Position = UDim2.new(0.00800000038, 0, 0.400000006, 49)
-    Spectators.Size = UDim2.new(0, 200, 0, 20)
 
-    Container.Name = "Container"
-    Container.Parent = Spectators
-    Container.BackgroundTransparency = 1.000
-    Container.BorderSizePixel = 0
-    Container.Position = UDim2.new(0, 0, 0, 4)
-    Container.Size = UDim2.new(1, 0, 0, 14)
-    Container.ZIndex = 3
-
-    UIPadding.Parent = Container
-    UIPadding.PaddingLeft = UDim.new(0, 4)
-
-    Text.Name = "Text"
-    Text.Parent = Container
-    Text.BackgroundTransparency = 1.000
-    Text.Size = UDim2.new(1, 0, 1, 0)
-    Text.ZIndex = 4
-    Text.Font = Enum.Font.Code
-    Text.Text = "Spectators"
-    Text.TextColor3 = Color3.fromRGB(65025, 65025, 65025)
-    Text.TextSize = 14.000
-    Text.TextStrokeTransparency = 0.000
-
-    Players.Name = "Players"
-    Players.Parent = Container
-    Players.BackgroundTransparency = 1.000
-    Players.Position = UDim2.new(0.0196080022, 0, 1.14285719, 0)
-    Players.Size = UDim2.new(0.980391979, 0, 1.14285719, 0)
-    Players.ZIndex = 4
-    Players.Font = Enum.Font.Code
-    Players.Text = "loading..."
-    Players.TextColor3 = Color3.fromRGB(65025, 65025, 65025)
-    Players.TextSize = 14.000
-    Players.TextStrokeTransparency = 0.000
-    Players.TextYAlignment = Enum.TextYAlignment.Top
-
-    Background.Name = "Background"
-    Background.Parent = Spectators
-    Background.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
-    Background.BorderColor3 = Color3.fromRGB(20, 20, 20)
-    Background.Size = UDim2.new(1, 0, 1, 0)
-
-    UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(90, 90, 90))}
-    UIGradient.Rotation = 90
-    UIGradient.Parent = Background
-
-    Color.Name = "Color"
-    Color.Parent = Spectators
-    Color.BackgroundColor3 = library.libColor
-    Color.BorderSizePixel = 0
-    Color.Size = UDim2.new(1, 0, 0, 2)
-    Color.ZIndex = 2
-
-    UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(60, 60, 60))}
-    UIGradient_2.Rotation = 90
-    UIGradient_2.Parent = Color
-
+    
     function GetSpectators()
-        local CurrentSpectators = ""
-        for i,v in pairs(game.Players:GetChildren()) do 
-            pcall(function()
-                if v ~= game.Players.LocalPlayer then
-                    if not v.Character then 
-                        if (v.CameraCF.Value.p - game.Workspace.CurrentCamera.CFrame.p).Magnitude < 10 then 
-                            if CurrentSpectators == "" then
-                                    CurrentSpectators = v.Name
-                                else
-                                    CurrentSpectators = CurrentSpectators.. "\n" ..v.Name
-                                end
-                            end
-                        end
-                    end
-                end)
+        local CurrentSpectators = {}
+        
+        for i,v in pairs(players:GetChildren()) do 
+            if v ~= localPlayer then
+                if not v.Character and v:FindFirstChild("CameraCF") and (v.CameraCF.Value.Position - workspace.CurrentCamera.CFrame.p).Magnitude < 10 then 
+                    table.insert(CurrentSpectators, v)
+
+
+              
+                end
             end
+        end
+        
         return CurrentSpectators
     end
 
     spawn(function()
         while wait(0.1) do
             if SpectatorsList.Enabled then
-                Players.Text = GetSpectators()
+                Spectators.BorderColor3 = library.libColor
+           
+               
+           for i,label in pairs(Container:GetChildren()) do
+            if label:IsA("TextLabel") then
+label:Destroy()
             end
+           end
+            
+
+        
+                for i,v in pairs(GetSpectators()) do
+                 if Container:FindFirstChild(v.Name) then
+                    Container:FindFirstChild(v.Name):Destroy()
+                 end
+
+                local newplayershit = Players:Clone()
+                newplayershit.Parent = Container
+                newplayershit.Visible = true
+
+                newplayershit.Name = v.Name
+                newplayershit.Text = v.Name
+            
         end
-    end)
+    end
+    
+
+                
+     end  
+end)
 
     local function SCUAM_fake_script() -- Spectators.LocalScript 
         local script = Instance.new('LocalScript', Spectators)
@@ -967,18 +1075,30 @@ otherGroup:addToggle({text = "Spectator List",flag = "spec_list",callback = func
 elseif val ==  false then
     game.CoreGui.SpectatorsList:Destroy()
 end
-end})
 
-otherGroup2:addToggle({text = "Backtrack",flag = "backtrack_enabled"})
-otherGroup2:addToggle({text = "Hitsound",flag = "hitsound_enabled"})
+end})
 
 otherGroup2:addList({text = "Hit Sound",flag = "hitsound_value",values = {"Bameware","Bell","Bubble","Pick","Pop","Rust","Skeet","Neverlose","Minecraft"}})
 otherGroup2:addButton({text = "Crash Server",callback = function()
     if not isAlive() then
-        library:notify("Waiting until you respawn...")
+        getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+        "cuteware.shit",
+        "waiting till u respawn",
+        library.libColor, 
+        Color3.new(1,1,1),
+        .01
+    )
         repeat wait(1) until isAlive()
     end
-    library:notify("Crashing server...")
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+        "cuteware.shit",
+        "crashing server..",
+        library.libColor, 
+        Color3.new(1,1,1),
+        .01
+    )
     while runService.RenderStepped:Wait() do
         for i=1,20 do
             pcall(function()
@@ -987,64 +1107,44 @@ otherGroup2:addButton({text = "Crash Server",callback = function()
         end
     end
 end})
-otherGroup2:addButton({text = "Unlock All Skins",callback = function() 
+
+
+otherGroup2:addButton({text = "unlock inventory",callback = function() 
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+    getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+        "cuteware.shit",
+        "unlocked inventory",
+        library.libColor, 
+        Color3.new(1,1,1),
+        .01
+    )
     if not unlockInventory then
+        while true do
+            wait()
         unlockInventory = true
         client.CurrentInventory = skins
         local TClone, CTClone = localPlayer.SkinFolder.TFolder:Clone(),localPlayer.SkinFolder.CTFolder:Clone()
         localPlayer.SkinFolder.TFolder:Destroy();localPlayer.SkinFolder.CTFolder:Destroy()
         TClone.Parent = localPlayer.SkinFolder;CTClone.Parent = localPlayer.SkinFolder
+        end
+        
     end
-end})
-otherGroup2:addButton({text = "Save Skins",callback = function() 
-local skinstable = {}
-
-for i,skins in pairs(localPlayer.SkinFolder.TFolder) do
-table.insert(skinstable, skins)
-end
 
 
-writefile("Yeet.cfg",skinstable)
- 
+
 end})
-otherGroup2:addButton({text = "Load Saved Skins",callback = function() 
-    readfile("Yeet.cfg",game.Players.LocalPlayer.SkinFolder.TFolder.AK47.Value)
-end})
+
+
+
 otherGroup2:addSlider({text = "Backtrack Time",flag = "backtrack_time",value = 500,min = 1,max = 2000})
 otherGroup2:addSlider({text = "Backtrack Transparency",flag = "backtrack_transparency",value = 75,min = 0,max = 100})
 otherGroup2:addSlider({text = "Hitsound Volume",flag = "hitsound_volume",value = 2,min = 1,max = 10})
 
 
-local luaGroup = luaTab:createGroup(0)
-
-
-
-local allluas = {}
-
-for _,lua in pairs(listfiles("movement.cc/luas")) do
-	local luaname = string.gsub(lua, "movement.cc/luas\\", "")
-	table.insert(allluas, luaname)
-end
-
-local lualist = luaGroup:addList({text = "Luas",flag = "selectedlua",multiselect = false,values = allluas})
-
-
-luaGroup:addButton({text = "Load",callback = function()
-    local name = library.flags["selectedlua"]
-    loadstring(readfile("movement.cc/luas/"..name))()
-end})
-
-luaGroup:addButton({text = "Refresh",callback = function()
-    local tbl = {}
-    for _,lua in pairs(listfiles("movement.cc/luas")) do
-        local luaname = string.gsub(lua, "movement.cc/luas\\", "")
-        table.insert(tbl, luaname)
-    end
-    library.options["selectedlua"].refresh(tbl)
-end})
 
 
 local btFolder = Instance.new("Folder",workspace)
+btFolder.Name = "protectb"
 players.PlayerAdded:Connect(function(plr)
     createEsp(plr)
     if btFolder:FindFirstChild(plr.Name) then return end
@@ -1093,6 +1193,7 @@ btPart.Name = "btp"
 function onStep()
     silentPart = nil
     local weapon = getWeaponInfo()
+    
     if library.flags["esp_enabled"] then
         for playerName,esp in next, espObjects do
             local player = players:FindFirstChild(playerName)
@@ -1251,9 +1352,14 @@ ebsfx.SoundId = 'rbxassetid://7921976380'
                     wait(0.075)
                     ebCooldown = false
                 end)
-                ebsfx:Play()
-                ebsfx.Volume = 2
-                library:notify("edgebugged!")
+                getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+                getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+                    "cuteware.shit",
+                    "edgebug",
+                    library.libColor, 
+                    Color3.new(1,1,1),
+                    .01
+                )
             end
         end
         oldState = currentState
@@ -1280,12 +1386,6 @@ ebsfx.SoundId = 'rbxassetid://7921976380'
                     end)
                 end
             end
-            if not isAlive(v) then
-                if library.flags["spec_list"] and plrPos and v:FindFirstChild("CameraCF") then
-                    if (v.CameraCF.Value.p-plrPos).magnitude < 20 then 
-                        speclistText.Text = speclistText.Text.."\n"..v.Name
-                    end
-                end
             end
         end
     end
@@ -1319,14 +1419,15 @@ ebsfx.SoundId = 'rbxassetid://7921976380'
     veloIndicator.Visible = library.flags["velo_graph"] and library.flags["drawing_enabled"]
     lighting.TimeOfDay = library.flags["time_changer"] and library.flags["time_value"]/2 or lighting.TimeOfDay
     localPlayer.Cash.Value = library.flags["inf_cash"] and 16000 or localPlayer.Cash.Value
+
     if library.flags["watermark_enabled"] then
         local sec,min,hrs = os.date("*t",os.time())["sec"],os.date("*t",os.time())["min"],os.date("*t",os.time())["hour"]
         local seconds = string.len(sec) == 2 and sec or "0"..sec
         local minutes = string.len(min) == 2 and min or "0"..min
         local hours = string.len(hrs) == 2 and hrs or "0"..hrs
-        aloraWatermark.Text = "movement.cc | "..ver.." | "..hours..":"..minutes..":"..seconds
+        aloraWatermark.Text = "cuteware.shit | "..ver.." | "..hours..":"..minutes..":"..seconds
     end
-end
+
 runService.RenderStepped:Connect(onStep)
 spawn(function()
     while wait() do
